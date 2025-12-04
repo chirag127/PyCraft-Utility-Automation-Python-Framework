@@ -1,0 +1,87 @@
+# CI/CD Pipeline for PyCraft Automation Framework
+# Executing 2026 Standard: uv, Ruff, Pytest
+
+name: PyCraft CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build_and_test:
+    name: Lint, Format, Build & Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12']
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'uv'
+
+    - name: Install Dependencies (uv & project)
+      run: |
+        # Install uv for dependency management (2026 Standard)
+        pip install uv
+        # Create a virtual environment and install project dependencies
+        uv venv
+        source .venv/bin/activate
+        uv pip install -e .[dev]
+
+    - name: Verify Formatting and Linting with Ruff
+      run: |
+        source .venv/bin/activate
+        # Check for format violations and lint errors simultaneously
+        echo "Running Ruff Check..."
+        ruff check . --output-format=github
+        ruff format --check .
+
+    - name: Run Unit and Integration Tests with Pytest
+      run: |
+        source .venv/bin/activate
+        echo "Running Pytest for comprehensive validation..."
+        pytest --cov=./ --cov-report=xml:coverage.xml
+
+    - name: Generate Code Coverage Report
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: coverage.xml
+        name: pycraft-framework
+        # Base URL for dynamic badge linking
+        flags: python-${{ matrix.python-version }}
+
+    - name: Build Documentation (Example Step)
+      if: success()
+      run: |
+        # Placeholder for Sphinx/MkDocs build if present
+        echo "Documentation build step successful (if documentation exists)"
+
+  # Deployment Stage (Only on main branch push)
+  deploy:
+    needs: [build_and_test]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Deploy Artifacts (e.g., PyPI or internal registry)
+      run: |
+        echo "Deployment logic triggered for main branch..."
+        # Example: Build and upload package to PyPI using uv/twine
+        # Replace with actual deployment script
+        echo "Simulating successful deployment to 2026 artifact registry."
