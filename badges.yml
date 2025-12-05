@@ -1,0 +1,27 @@
+build_status:
+  - provider: github_actions
+    workflow_name: CI
+    branch: main
+    image_url: https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/actions/workflows/ci.yml/badge.svg
+coverage:
+  - provider: codecov
+    url: https://codecov.io/github/chirag127/PyCraft-Utility-Automation-Python-Framework
+    branch: main
+    image_url: https://codecov.io/github/chirag127/PyCraft-Utility-Automation-Python-Framework/branch/main/graphs/badge.svg
+tech_stack:
+  - name: Python
+    image_url: https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square&logo=python
+  - name: uv
+    image_url: https://img.shields.io/badge/uv-dependency%20manager-brightgreen?style=flat-square&logo=uv
+  - name: Ruff
+    image_url: https://img.shields.io/badge/Ruff-linter%20%26%20formatter-orange?style=flat-square&logo=ruff
+  - name: Pytest
+    image_url: https://img.shields.io/badge/Pytest-testing-purple?style=flat-square&logo=pytest
+license:
+  - name: CC BY-NC 4.0
+    image_url: https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey?style=flat-square&logo=creativecommons
+community:
+  - name: GitHub Stars
+    image_url: https://img.shields.io/github/stars/chirag127/PyCraft-Utility-Automation-Python-Framework?style=flat-square&logo=github
+  - name: GitHub forks
+    image_url: https://img.shields.io/github/forks/chirag127/PyCraft-Utility-Automation-Python-Framework?style=flat-square&logo=github
