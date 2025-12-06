@@ -1,93 +1,95 @@
-# 🤝 Contributing to PyCraft-Utility-Automation-Python-Framework
+# Contributing to PyCraft-Utility-Automation-Python-Framework
 
-This repository, the **PyCraft Utility Automation Framework**, is engineered to the highest professional standards. We welcome contributions that enhance its modularity, performance, and reliability. All contributions must align with the **Apex Technical Authority** philosophy: Zero-Defect, High-Velocity, Future-Proof.
+Welcome! We appreciate your interest in contributing to the **PyCraft-Utility-Automation-Python-Framework**. Your contributions help us build a more robust, efficient, and versatile automation solution. This document outlines the guidelines for contributing to ensure a smooth and collaborative development process.
 
-## 1. Prerequisites & Environment Setup
+## Code of Conduct
 
-Before contributing, please ensure your local environment is configured according to our December 2025 standards. This project uses Python 3.10+ and relies on `uv` for dependency management.
+By participating in this project, you are expected to uphold our [Code of Conduct](https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/blob/main/CODE_OF_CONDUCT.md). Please read it carefully.
 
-1.  **Fork the Repository:** Create your own fork of `chirag127/PyCraft-Utility-Automation-Python-Framework`.
-2.  **Clone Your Fork:**
+## How Can I Contribute?
+
+### 🐞 Reporting Bugs
+
+*   Before submitting a bug report, please check the [existing issues](https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/issues) to see if the issue has already been reported.
+*   If not, open a new issue using our [bug report template](https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/blob/main/.github/ISSUE_TEMPLATE/bug_report.md). Provide a clear and concise description of the bug, steps to reproduce it, expected behavior, and your environment details.
+
+### 💡 Suggesting Enhancements
+
+*   We welcome suggestions for new features or improvements. Before creating a new enhancement request, check if a similar idea has already been discussed in [issues](https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/issues).
+*   Submit your ideas using the appropriate issue template, explaining the proposed feature, its benefits, and potential use cases.
+
+### 🚀 Submitting Pull Requests
+
+*   **Small, focused changes** are preferred. Larger changes should be broken down into smaller, logical pull requests.
+*   Ensure your changes adhere to our [Pull Request Template](https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/blob/main/.github/PULL_REQUEST_TEMPLATE.md) and guidelines below.
+
+## Local Development Setup
+
+To set up your local development environment, follow these steps:
+
+1.  **Fork and Clone the Repository:**
     bash
-    git clone https://github.com/YOUR_USERNAME/PyCraft-Utility-Automation-Python-Framework.git
+    git clone https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework.git
     cd PyCraft-Utility-Automation-Python-Framework
     
-3.  **Environment Setup (Using uv):
-    **
-    We use isolated environments managed by `uv` for speed and consistency.
-    bash
-    # Create and activate the virtual environment
-    uv venv
-    source .venv/bin/activate  # On Windows use .venv\Scripts\activate
 
-    # Install development dependencies (including testing, linting, and documentation tools)
-    uv pip install -e .[dev]
+2.  **Install `uv` (if not already installed):**
+    We use `uv` for ultra-fast dependency management.
+    bash
+    pip install uv
     
 
-## 2. Development Workflow
-
-Follow these steps for all feature additions, bug fixes, or documentation updates:
-
-### A. Branching Strategy
-
-All new work must be done on feature branches stemming from `main`. Follow the **Conventional Commits** specification.
-
-| Type | Description |
-| :--- | :--- |
-| `feat:` | A new feature (e.g., `feat: add new AWS module`). |
-| `fix:` | A bug fix (e.g., `fix: correct concurrency bug in scheduler`). |
-| `docs:` | Documentation changes only. |
-| `chore:` | Maintenance tasks, dependency updates, CI configuration. |
-
-**Branch Naming Convention:** `type/short-description` (e.g., `feat/azure-integration` or `fix/cli-argument-parsing`).
-
-### B. Code Quality Enforcement (Ruff & Pytest)
-
-**Adherence to standards is non-negotiable.** Before submitting a Pull Request, you **MUST** verify compliance:
-
-1.  **Linting & Formatting (Ruff):
-    **
-    Run Ruff to automatically fix formatting issues and check for style violations.
+3.  **Create and Activate a Virtual Environment with `uv`:**
     bash
-    ruff check --fix .
+    uv venv
+    source .venv/bin/activate  # On macOS/Linux
+    # .venv\Scripts\activate   # On Windows
+    
+
+4.  **Install Dependencies:**
+    bash
+    uv pip install -e '.[dev,test]'
+    
+
+5.  **Run Tests:**
+    Ensure all existing tests pass before making changes.
+    bash
+    pytest
+    
+
+6.  **Lint and Format Code:**
+    We use `Ruff` for linting and formatting. Run it regularly to maintain code quality.
+    bash
+    ruff check .
     ruff format .
     
-2.  **Testing (Pytest):
-    **
-    Ensure 100% test coverage for your changes. Run the full test suite to confirm no regressions were introduced.
+    You can also run auto-fix:
     bash
-    pytest --cov=pycraft --cov-report=term-missing
+    ruff check . --fix
     
-    *Note: New features require accompanying unit and integration tests.* 
 
-## 3. Submitting Contributions
+## Coding Guidelines
 
-Once steps 1 and 2 are complete and verified locally:
+*   **Python Standards:** Adhere to [PEP 8](https://www.python.org/dev/peps/pep-0008/) for code style. Use type hints extensively.
+*   **Architectural Principles:** Follow the project's **Modular Monolith** architecture. Ensure clear separation of concerns and adherence to **SOLID**, **DRY**, and **YAGNI** principles.
+*   **Documentation:** All new features or significant changes must include appropriate documentation, including docstrings for functions/classes, and updates to the `README.md` if necessary.
+*   **Testing:** Write comprehensive unit and integration tests for new features and bug fixes. Aim for high code coverage.
+*   **Commit Messages:** Follow the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) (e.g., `feat: add new CLI command`, `fix: resolve data parsing error`).
 
-1.  **Commit Changes:** Ensure commits are atomic and follow the Conventional Commits standard.
-    bash
-    git add .
-    git commit -m "feat: implemented robust logging adapter"
-    
-2.  **Push to Your Fork:**
-    bash
-    git push origin HEAD
-    
-3.  **Open a Pull Request (PR):** Navigate to the upstream repository (`https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework`) and open a PR against the `main` branch. The PR **MUST** reference the associated issue, if one exists, using the established template.
+## Pull Request Guidelines
 
-## 4. Architectural Alignment
+Before submitting your pull request, please ensure the following:
 
-Contributions must respect the underlying design principles:
+1.  **Branch Naming:** Create a new branch for your feature or bug fix (e.g., `feature/my-new-feature` or `bugfix/issue-123`).
+2.  **Clear Description:** Provide a detailed description in your pull request, explaining the changes, their purpose, and any relevant issue numbers.
+3.  **Tests:** Include new or updated tests that validate your changes.
+4.  **Pass All Checks:** Ensure your code passes all linting, formatting, and test checks locally before pushing.
+5.  **Code Review:** Be prepared for constructive feedback during the code review process.
 
-*   **SOLID Principles:** Maintain high cohesion and low coupling.
-*   **Modularity:** New functionality should be encapsulated in its own module/subpackage.
-*   **DRY (Don't Repeat Yourself):** Abstract common logic aggressively.
-*   **Error Handling:** Utilize structured exceptions, not bare `try/except` blocks. All external API calls must have explicit retry/fail logic.
+## Security Vulnerabilities
 
-## 5. Security Vulnerability Disclosure
+If you discover a security vulnerability, please report it responsibly by following our [Security Policy](https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/blob/main/.github/SECURITY.md).
 
-If you discover a security vulnerability, **DO NOT** open a public issue. Please follow the protocols outlined in our security policy:
+## License
 
-**Read the complete policy here:** `/.github/SECURITY.md`
-
-Report findings privately to `security@apex-architect.dev` (Placeholder Email for concept demonstration).
+By contributing to PyCraft-Utility-Automation-Python-Framework, you agree that your contributions will be licensed under the [CC BY-NC 4.0 License](https://github.com/chirag127/PyCraft-Utility-Automation-Python-Framework/blob/main/LICENSE).
